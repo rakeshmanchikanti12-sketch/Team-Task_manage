@@ -112,7 +112,12 @@ app.delete("/api/tasks/:id", async (req, res) => {
 });
 
 // 4. START SERVER
-const PORT = 5000;
+// Root health-check for platforms like Railway
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Team Task Manager API is running' });
+});
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
